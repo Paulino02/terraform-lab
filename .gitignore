@@ -2,3 +2,4 @@
 .terraform
 provider_backend.tf
 state.tfstate
+vpc
