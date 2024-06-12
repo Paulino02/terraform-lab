@@ -42,12 +42,3 @@ resource "aws_route_table_association" "PublicRTAssociation" {
   route_table_id = aws_route_table.PublicRT.id
 }
 
-resource "aws_instance" "teste" {
-  ami           = "ami-04b70fa74e45c3917"     # Substitua pelo ID da AMI desejada
-  instance_type = "t2.micro"
-  subnet_id     = aws_subnet.PublicSubnet.id  # Substitua pelo ID da sub-rede desejada
-
-  tags = {
-    Name = "MinhaInstanciaEC2"
-  }
-}
