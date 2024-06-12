@@ -20,7 +20,7 @@ resource "aws_ecs_task_definition" "my_task" {
 [
   {
     "name": "my-container-api",
-    "image": "${aws_ecr_repository.my_repo.repository_url}:latest",
+    "image": "${aws_ecr_repository.repo.repository_url}:latest",
     "essential": true,
     "portMappings": [
       {
