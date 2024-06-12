@@ -1,3 +1,3 @@
 resource "aws_ecrpublic_repository" "example" {
-  repository_name = "repo-images"
+  repository_name = "tiago_NTConsult"
 }
