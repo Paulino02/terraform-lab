@@ -47,7 +47,7 @@ resource "aws_ecs_service" "my_service" {
 
   network_configuration {
     subnets = ["aws_subnet.PublicSubnet.id"]
-    security_groups = ["sg-12345678"]
+    security_groups = ["aws_security_group.allow_http.id"]
     assign_public_ip = true
   }
 }
