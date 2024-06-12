@@ -19,7 +19,7 @@ resource "aws_ecs_task_definition" "my_task" {
   container_definitions = <<DEFINITION
 [
   {
-    "name": "my-container",
+    "name": "my-container-api",
     "image": "${aws_ecr_repository.my_repo.repository_url}:latest",
     "essential": true,
     "portMappings": [
