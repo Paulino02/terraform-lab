@@ -1,11 +1,13 @@
+# Criação do ECR
+resource "aws_ecr_repository" "repo" {
+  name = "tiago_NTConsult"
+}
+
 resource "aws_ecs_cluster" "my_cluster" {
   name = "my-cluster"
 }
 
-
-### 5. Definição da Task Definition
-
-Defina uma task definition que usará a imagem do ECR:
+# Definição da Task Definition no ECS
 
 data "aws_ecr_authorization_token" "auth" {}
 
@@ -33,9 +35,7 @@ resource "aws_ecs_task_definition" "my_task" {
 DEFINITION
 }
 
-### 6. Criação do Service ECS
-
-Crie um serviço ECS que use a task definition:
+# Criação do Service ECS
 
 resource "aws_ecs_service" "my_service" {
   name            = "my-service"
