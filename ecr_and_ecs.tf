@@ -26,8 +26,8 @@ resource "aws_ecs_task_definition" "my_task" {
     "essential": true,
     "portMappings": [
       {
-        "containerPort": 80,
-        "hostPort": 80
+        "containerPort": 8080,
+        "hostPort": 8080
       }
     ]
   }
@@ -50,4 +50,19 @@ resource "aws_ecs_service" "my_service" {
     security_groups = ["aws_security_group.allow_http.id"]
     assign_public_ip = true
   }
+
+  load_balancer {
+    target_group_arn = aws_lb_target_group.my_target_group.arn
+    container_name   = "my-container-api"
+    container_port   = 8080
+  }
+
+  depends_on = [aws_lb_listener.my_listener]
 }
+
+# Outputs
+output "alb_dns_name" {
+  value = aws_lb.my_lb.dns_name
+}
+
+
