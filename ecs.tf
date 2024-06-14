@@ -1,8 +1,3 @@
-# Criação do ECR
-resource "aws_ecr_repository" "repo" {
-  name = "tiago_NTConsult"
-}
-
 resource "aws_ecs_cluster" "my_cluster" {
   name = "my-cluster"
 }
@@ -17,6 +12,9 @@ resource "aws_ecs_task_definition" "my_task" {
   requires_compatibilities = ["FARGATE"]
   cpu                   = "256"
   memory                = "512"
+
+  execution_role_arn     = aws_iam_role.ecs_task_execution_role.arn
+  task_role_arn          = aws_iam_role.ecs_task_execution_role.arn
 
   container_definitions = <<DEFINITION
 [
@@ -42,12 +40,11 @@ resource "aws_ecs_service" "my_service" {
   cluster         = aws_ecs_cluster.my_cluster.id
   task_definition = aws_ecs_task_definition.my_task.arn
   desired_count   = 1
-
   launch_type = "FARGATE"
 
   network_configuration {
-    subnets = ["aws_subnet.PublicSubnet.id"]
-    security_groups = ["aws_security_group.allow_http.id"]
+    subnets = [aws_subnet.PublicSubnet1.id]
+    security_groups = [aws_security_group.allow_http.id]
     assign_public_ip = true
   }
 
