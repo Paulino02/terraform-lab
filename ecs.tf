@@ -43,7 +43,7 @@ resource "aws_ecs_service" "my_service" {
   launch_type = "FARGATE"
 
   network_configuration {
-    subnets = [aws_subnet.PublicSubnet1.id]
+    subnets = [aws_subnet.PublicSubnet1.id, aws_subnet.PublicSubnet2.id]
     security_groups = [aws_security_group.allow_http.id]
     assign_public_ip = true
   }
@@ -61,5 +61,3 @@ resource "aws_ecs_service" "my_service" {
 output "alb_dns_name" {
   value = aws_lb.my_lb.dns_name
 }
-
-
